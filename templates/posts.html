@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Posts</title>
+</head>
+<body>
+<div>
+    <h1>Posts</h1>
+</div>
+<div id="menu">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Subject</th>
+        </tr>
+        {% for row in posts %}
+            <tr>
+                <td> {{ row['id'] }} </td>
+                <td><a href="/posts/show/{{ row['id'] }}"> {{ row['subject'] }} </a></td>
+            </tr>
+
+        {% endfor %}
+    </table>
+    <br>
+    {% if prev_flag %}
+        <a href="/posts/back">Back</a>
+    {% endif %}
+    {% if next_flag %}
+        <a href="/posts/next">Next</a>
+    {% endif %}
+</div>
+</body>
+</html>
