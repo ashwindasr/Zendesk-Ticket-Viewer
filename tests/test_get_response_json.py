@@ -6,6 +6,9 @@ import requests
 
 class MyTestCase(unittest.TestCase):
     def test_1(self):
+        """
+        Test to check if the API is working and tickets are being retrieved.
+        """
         credentials = os.environ['EMAIL'], os.environ['PASSWORD']
         session = requests.Session()
         session.auth = credentials
@@ -17,6 +20,9 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(answer['tickets'] is not None)
 
     def test_2(self):
+        """
+        Test to check when server given is incorrect
+        """
         credentials2 = "a@email.com", "password"
         session2 = requests.Session()
         session2.auth = credentials2
