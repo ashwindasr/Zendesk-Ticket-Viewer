@@ -21,7 +21,7 @@ The `templates` directory contains the html files rendred by the app. The `index
 ### tests
 The `tests` directory contains the unittests for checking the flask app endpoints and whether the Zendesk API is working or not.
 
-## Screenshots
+## :mag_right: Screenshots
 ![alt text](https://github.com/ashwindasr/Zendesk-Ticket-Viewer/blob/master/assets/images/2.png)
 ![alt text](https://github.com/ashwindasr/Zendesk-Ticket-Viewer/blob/master/assets/images/1.png)
 
