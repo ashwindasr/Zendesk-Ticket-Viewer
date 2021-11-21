@@ -58,6 +58,8 @@ def posts_index():
     current_page_count = len(posts['tickets'])
     requester_names = get_requester_names(posts['tickets'])
 
+    # Dict to be passed to posts.html.
+    # Multiple variables put in a dict for better code readability
     context = {
         'posts': posts['tickets'],
         'prev_flag': prev_flag,
