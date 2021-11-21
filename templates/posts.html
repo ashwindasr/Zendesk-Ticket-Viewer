@@ -10,7 +10,7 @@
         td {
             text-align: center;
             vertical-align: middle;
-            padding: 10px ;
+            padding: 10px;
         }
     </style>
 </head>
@@ -20,6 +20,15 @@
 </div>
 Total Ticket Count = {{ total_posts_count }} <br>
 Currently displaying {{ current_page_count }} tickets on this page <br><br>
+
+{% if prev_flag %}
+    <a href="/posts/back">Back</a>
+{% endif %}
+{% if next_flag %}
+    <a href="/posts/next">Next</a>
+{% endif %}
+<br>
+
 <div>
     <table>
         <tr>
