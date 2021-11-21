@@ -2,21 +2,36 @@
 <html lang="en">
 <head>
     <title>Posts</title>
+    <style>
+        table, td, th {
+            border: 1px solid black
+        }
+
+        td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 10px ;
+        }
+    </style>
 </head>
 <body>
 <div>
     <h1>Posts</h1>
 </div>
-<div id="menu">
+Total Ticket Count = {{ total_posts_count }} <br>
+Currently displaying {{ current_page_count }} tickets on this page <br><br>
+<div>
     <table>
         <tr>
-            <th>ID</th>
+            <th>Ticket ID</th>
             <th>Subject</th>
+            <th>Requester</th>
         </tr>
         {% for row in posts %}
             <tr>
                 <td> {{ row['id'] }} </td>
                 <td><a href="/posts/show/{{ row['id'] }}"> {{ row['subject'] }} </a></td>
+                <td>{{ requester_names[row['requester_id']] }}</td>
             </tr>
 
         {% endfor %}
