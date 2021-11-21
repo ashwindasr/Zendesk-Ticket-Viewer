@@ -2,9 +2,13 @@
 
 ![GitHub](https://img.shields.io/badge/Language-Python-blue.svg)
 
-Built using Python and Flask.
+Built using `Python 3.9` and `Flask`.
+
+The project conforms to the [PEP](https://www.python.org/dev/peps/pep-0008/) style guidelines for Python code.
 
 ## :rocket: Setup
+Install `Python 3.9` from the website [here](https://www.python.org/downloads/).
+
 The `requirements.txt` file includes all the necessary dependencies which can be run with the command.
 ```
 pip install -r requirements.txt
