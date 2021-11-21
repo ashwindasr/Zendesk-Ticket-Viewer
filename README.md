@@ -13,7 +13,9 @@ The `requirements.txt` file includes all the necessary dependencies which can be
 ```
 pip install -r requirements.txt
 ```
-Also make sure to store the auth creadentials in local environment variables `EMAIL`, `PASSWORD` and `SERVER`.
+Also make sure to store the auth creadentials in local environment variables `EMAIL`, `PASSWORD` and `MY_SERVER`.
+
+After that run the `app.py` file and the server should be up and running. Make sure to add the environment variables to the IDE as well if you are using one to run, like PyCharm.
 ## :compass: Navigation
 
 ### routes.py
