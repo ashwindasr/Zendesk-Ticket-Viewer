@@ -58,9 +58,15 @@ def posts_index():
     current_page_count = len(posts['tickets'])
     requester_names = get_requester_names(posts['tickets'])
 
-    return render_template("posts.html", posts=posts['tickets'], prev_flag=prev_flag, next_flag=next_flag,
-                           total_posts_count=total_posts_count, current_page_count=current_page_count,
-                           requester_names=requester_names)
+    context = {
+        'posts': posts['tickets'],
+        'prev_flag': prev_flag,
+        'next_flag': next_flag,
+        'total_posts_count': total_posts_count,
+        'current_page_count': current_page_count,
+    }
+
+    return render_template("posts.html", context=context, requester_names=requester_names)
 
 
 @app.route('/posts/next')
