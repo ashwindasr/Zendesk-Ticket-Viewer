@@ -1,10 +1,8 @@
 """routes.py"""
 
 import os
-
 import requests
 from flask import render_template, redirect
-
 from app import app
 
 # Getting the email and password for zendesk from environment variables
@@ -128,6 +126,8 @@ def show_post(ticket_id):
     return render_template("show.html", ticket=ticket['ticket'], requester_name=requester_name)
 
 
+# Utility functions
+# Kept in the same file as routs as session variable is needed in the same scope.
 def get_response_json(request_url):
     """
     Utility function that returns the json response to the request.
