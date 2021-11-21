@@ -21,6 +21,11 @@ def index():
 
 @app.route('/posts')
 def posts_index():
+    try:
+        _ = check_api_status()
+    except:
+        return render_template("error.html")
+
     posts = get_response_json(url)
 
     prev_link = posts['links']['prev']
@@ -44,6 +49,11 @@ def posts_index():
 
 @app.route('/posts/next')
 def posts_next():
+    try:
+        _ = check_api_status()
+    except:
+        return render_template("error.html")
+
     global url
     url = get_response_json(url)['links']['next']
     return redirect("/posts")
@@ -51,6 +61,11 @@ def posts_next():
 
 @app.route('/posts/back')
 def posts_back():
+    try:
+        _ = check_api_status()
+    except:
+        return render_template("error.html")
+
     global url
     url = get_response_json(url)['links']['prev']
     return redirect("/posts")
@@ -58,6 +73,11 @@ def posts_back():
 
 @app.route('/posts/show/<int:post_id>')
 def show_post(post_id):
+    try:
+        _ = check_api_status()
+    except:
+        return render_template("error.html")
+
     show_url = base_url + f"/tickets/{post_id}"
     post = get_response_json(show_url)
 
@@ -86,3 +106,8 @@ def get_requester_names(data):
     for row in data:
         names[row['requester_id']] = get_requester_data(row['requester_id'])
     return names
+
+
+def check_api_status():
+    response = session.get(f"{base_url}/users")
+    return response.status_code
