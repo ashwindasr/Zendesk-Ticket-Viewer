@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-<h1>{{ post['subject'] }}</h1>
+<h1>{{ ticket['subject'] }}</h1>
 
 <table>
     <tr>
@@ -26,18 +26,18 @@
     </tr>
     <tr>
         <td>Ticket ID</td>
-        <td>{{ post['id'] }}</td>
+        <td>{{ ticket['id'] }}</td>
     </tr>
     <tr>
         <td>Subject </td>
-        <td>{{ post['subject'] }}</td>
+        <td>{{ ticket['subject'] }}</td>
     </tr>
     <tr>
         <td>Description </td>
-        <td>{{ post['description'] }}</td>
+        <td>{{ ticket['description'] }}</td>
     </tr>
 </table>
 <br>
-<a href="/posts">< Back to all tickets</a>
+<a href="/">< Back to all tickets</a>
 </body>
 </html>

@@ -20,19 +20,9 @@ url = f'{ZENDESK}/api/v2/tickets.json?page[size]=25'  # Global url variable used
 @app.route('/')
 def index():
     """
-    Index function. Currently no functionality implemented.
+    Function which displays all the tickets.
 
-    :return: Redirect to /posts
-    """
-    return redirect("/posts")
-
-
-@app.route('/posts')
-def posts_index():
-    """
-    Function which handles the request to the posts page.
-
-    :return: error.html page if zendesk API error else the posts.html page
+    :return: error.html page if zendesk API error else the index.html page
     """
 
     # Try except block to check whether zendesk API is available
@@ -42,10 +32,10 @@ def posts_index():
     except:
         return render_template("error.html")
 
-    posts = get_response_json(url)
+    tickets = get_response_json(url)
 
-    prev_link = posts['links']['prev']  # URL to the previous set of tickets
-    next_link = posts['links']['next']  # URL to the next set of tickets
+    prev_link = tickets['links']['prev']  # URL to the previous set of tickets
+    next_link = tickets['links']['next']  # URL to the next set of tickets
 
     # Checking to see if the 'prev' link has any tickets or if its empty
     prev_flag = True if \
@@ -55,29 +45,29 @@ def posts_index():
         session.get(next_link).json()['tickets'] != [] else False
 
     total_posts_count = session.get(f"{base_url}/tickets/count").json()['count']['value']
-    current_page_count = len(posts['tickets'])
-    requester_names = get_requester_names(posts['tickets'])
+    current_page_count = len(tickets['tickets'])
+    requester_names = get_requester_names(tickets['tickets'])
 
-    # Dict to be passed to posts.html.
+    # Dict to be passed to index.html.
     # Multiple variables put in a dict for better code readability
     context = {
-        'posts': posts['tickets'],
+        'tickets': tickets['tickets'],
         'prev_flag': prev_flag,
         'next_flag': next_flag,
         'total_posts_count': total_posts_count,
         'current_page_count': current_page_count,
     }
 
-    return render_template("posts.html", context=context, requester_names=requester_names)
+    return render_template("index.html", context=context, requester_names=requester_names)
 
 
-@app.route('/posts/next')
+@app.route('/next')
 def posts_next():
     """
     Function that handles the request when the 'next' link is clicked.
-    The link inside the 'next' field is set to the url variable and the control is redirected to the /posts handler.
+    The link inside the 'next' field is set to the url variable and the control is redirected to the root handler.
 
-    :return: redirect to the /posts handler
+    :return: redirect to the root handler (index.html)
     """
 
     # Try except block to check whether zendesk API is available
@@ -90,16 +80,16 @@ def posts_next():
     global url
     url = get_response_json(url)['links']['next']
 
-    return redirect("/posts")
+    return redirect("/")
 
 
-@app.route('/posts/back')
+@app.route('/back')
 def posts_back():
     """
     Function that handles the request when the 'back' link is clicked.
-    The link inside the 'prev' field is set to the url variable and the control is redirected to the /posts handler.
+    The link inside the 'prev' field is set to the url variable and the control is redirected to the root handler.
 
-    :return: redirect to the /posts handler
+    :return: redirect to the root handler (index.html)
     """
 
     # Try except block to check whether zendesk API is available
@@ -111,15 +101,15 @@ def posts_back():
 
     global url
     url = get_response_json(url)['links']['prev']
-    return redirect("/posts")
+    return redirect("/")
 
 
-@app.route('/posts/show/<int:post_id>')
-def show_post(post_id):
+@app.route('/ticket/<int:ticket_id>')
+def show_post(ticket_id):
     """
     Shows the details of a ticket with the
 
-    :param post_id: Ticket id
+    :param ticket_id: Ticket id
     :return: show.html page
     """
     # Try except block to check whether zendesk API is available
@@ -129,13 +119,13 @@ def show_post(post_id):
     except:
         return render_template("error.html")
 
-    show_url = base_url + f"/tickets/{post_id}"
-    post = get_response_json(show_url)
+    show_url = base_url + f"/tickets/{ticket_id}"
+    ticket = get_response_json(show_url)
 
-    requester_id = post['ticket']['requester_id']
+    requester_id = ticket['ticket']['requester_id']
     requester_name = get_requester_data(requester_id)
 
-    return render_template("show.html", post=post['ticket'], post_id=post_id, requester_name=requester_name)
+    return render_template("show.html", ticket=ticket['ticket'], requester_name=requester_name)
 
 
 def get_response_json(request_url):
@@ -165,10 +155,10 @@ def get_requester_data(req_id):
 
 def get_requester_names(data):
     """
-    Function to map the requester IDs with the corresponding names to be used in the posts.html page.
+    Function to map the requester IDs with the corresponding names to be used in the index.html page.
 
     :param data: Tickets data
-    :return: Python dict with name
+    :return: Python dict with requester_id:name mapping
     """
     names = {}
     for row in data:

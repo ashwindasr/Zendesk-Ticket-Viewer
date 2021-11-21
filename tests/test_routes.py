@@ -5,6 +5,7 @@ import requests
 localhost = "http://127.0.0.1:5000"
 
 
+# Tests to be run when flask server is running
 class MyTestCase(unittest.TestCase):
     def test_1(self):
         response = requests.get(localhost + "/posts")

@@ -16,16 +16,16 @@
 </head>
 <body>
 <div>
-    <h1>Posts</h1>
+    <h1>Tickets</h1>
 </div>
 Total Ticket Count = {{ context['total_posts_count'] }} <br>
 Currently displaying {{ context['current_page_count'] }} ticket(s) on this page <br><br>
 
 {% if context['prev_flag'] %}
-    <a href="/posts/back">Back</a>
+    <a href="/back">Back</a>
 {% endif %}
 {% if context['next_flag'] %}
-    <a href="/posts/next">Next</a>
+    <a href="/next">Next</a>
 {% endif %}
 <br>
 
@@ -36,10 +36,10 @@ Currently displaying {{ context['current_page_count'] }} ticket(s) on this page 
             <th>Subject</th>
             <th>Requester</th>
         </tr>
-        {% for row in context['posts'] %}
+        {% for row in context['tickets'] %}
             <tr>
                 <td> {{ row['id'] }} </td>
-                <td><a href="/posts/show/{{ row['id'] }}"> {{ row['subject'] }} </a></td>
+                <td><a href="/ticket/{{ row['id'] }}"> {{ row['subject'] }} </a></td>
                 <td>{{ requester_names[row['requester_id']] }}</td>
             </tr>
 
@@ -47,10 +47,10 @@ Currently displaying {{ context['current_page_count'] }} ticket(s) on this page 
     </table>
     <br>
     {% if context['prev_flag'] %}
-        <a href="/posts/back">Back</a>
+        <a href="/back">Back</a>
     {% endif %}
     {% if context['next_flag'] %}
-        <a href="/posts/next">Next</a>
+        <a href="/next">Next</a>
     {% endif %}
 </div>
 </body>
