@@ -7,13 +7,13 @@ Built using `Python 3.9` and `Flask`.
 The project conforms to the [PEP](https://www.python.org/dev/peps/pep-0008/) style guidelines for Python code.
 
 ## :rocket: Setup
-Install `Python 3.9` from the website [here](https://www.python.org/downloads/).
+Install `Python 3.9` from the website [here](https://www.python.org/downloads/), if you haven't already.
 
 The `requirements.txt` file includes all the necessary dependencies which can be run with the command.
 ```
 pip install -r requirements.txt
 ```
-Also make sure to store the auth creadentials in local environment variables `EMAIL`, `PASSWORD` and `MY_SERVER`.
+Also make sure to store the auth creadentials in local environment variables `EMAIL`, `PASSWORD` and `MY_SERVER` (your zendesk subdomain eg: zccjohndoe).
 
 After that run the `app.py` file and the server should be up and running. Make sure to add the environment variables to the IDE as well if you are using one to run, like PyCharm.
 ## :compass: Navigation
